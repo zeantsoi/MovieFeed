@@ -10,13 +10,15 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var errorLabel: UILabel!
 
     var movies: [NSDictionary]?
     var endpoint: String!
+    var queryString: String!
+    var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshFeed:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
+        
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, 140, 20))
+        let searchBarView = UIView(frame: searchBar.bounds)
+        searchBarView.addSubview(searchBar)
+
+        searchBarView.center = CGPoint(x: (self.navigationController?.navigationBar.center.x)!, y: 20.0)
+        self.navigationController?.navigationBar.addSubview(searchBarView)
+        searchBar.delegate = self
         
         refreshFeed(refreshControl)
     }
@@ -79,7 +89,20 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func refreshFeed(sender: UIRefreshControl) {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
+        let url: NSURL!
+        if (endpoint == "search") {
+            navigationController?.navigationBar.topItem!.title = nil
+            searchBar.hidden = false
+            if (queryString != nil) {
+                url = NSURL(string: "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(queryString)")
+            } else {
+                url = NSURL(string: "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)")
+            }
+        } else {
+            navigationController?.navigationBar.topItem!.title = "Movies"
+            searchBar.hidden = true
+            url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
+        }
         let request = NSURLRequest(
             URL: url!,
             cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
@@ -101,6 +124,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             self.movies = responseDictionary["results"] as? [NSDictionary]
                             self.tableView.reloadData()
                             sender.endRefreshing()
+                            self.searchBar.resignFirstResponder()
                             MBProgressHUD.hideHUDForView(self.view, animated: true)
                     }
                 } else {
@@ -108,6 +132,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 }
         })
         task.resume()
+    }
+
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        let refreshControl = UIRefreshControl()
+        queryString = searchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+        refreshFeed(refreshControl)
     }
 
     /*

@@ -13,7 +13,8 @@ Completed:
 * [x] Required: User can pull to refresh the movie list.
 * [x] Optional: Add a tab bar for Now Playing or Top Rated movies.
 * [x] Optional: Customize the highlight and selection effect of the cell.
-
+* [x] Optional: Add a search bar.
+* [x] Optional: Customize the navigation bar.
 
 *Core functionality*
 
@@ -23,7 +24,11 @@ Completed:
 
 ![Network error](https://github.com/zeantsoi/MovieFeed/blob/master/flicks_2.gif)
 
-Last updated: 2/7/2016
+*Search*
+
+![Search](https://github.com/zeantsoi/MovieFeed/blob/master/flicks_3.gif)
+
+Last updated: 2/8/2016
 
 ##License##
 

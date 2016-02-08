@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Movies View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" customModule="MovieViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -65,7 +65,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="Vk3-F1-jaC"/>
+                    <navigationItem key="navigationItem" id="Vk3-F1-jaC"/>
                     <connections>
                         <outlet property="errorLabel" destination="fDq-fo-HKb" id="8t4-qK-8u1"/>
                         <outlet property="tableView" destination="xSv-I5-Oc0" id="sgH-1A-wZJ"/>

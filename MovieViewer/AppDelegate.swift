@@ -32,10 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         topRatedNavigationController.tabBarItem.title = "Top Rated"
         topRatedNavigationController.tabBarItem.image = UIImage(named: "iconmonstr-trophy-7-24")
         
+        let searchNavigationController = storyboard.instantiateViewControllerWithIdentifier("MoviesNavigationController") as! UINavigationController
+        let searchViewController = searchNavigationController.topViewController as! MoviesViewController
+        searchViewController.endpoint = "search"
+        searchNavigationController.tabBarItem.title = "Search"
+        searchNavigationController.tabBarItem.image = UIImage(named: "iconmonstr-magnifier-10-24")
+        
+        
         // TODO: why does can I add title to tabBarItem and have it appear on both navigation controllers?
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController]
+        tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController, searchNavigationController]
         
         window!.rootViewController = tabBarController
 //        window!.makeKeyAndVisible()
