@@ -17,17 +17,13 @@ Completed:
 
 *Core functionality*
 
-![Default implementation](https://github.com/zeantsoi/RYG/blob/master/ryg_1.gif)
+![Default implementation](https://github.com/zeantsoi/MovieFeed/blob/master/flicks_1.gif)
 
-*Theme and default configuration*
+*Network error*
 
-![Theme and default configuration](https://github.com/zeantsoi/RYG/blob/master/ryg_2.gif)
+![Network error](https://github.com/zeantsoi/MovieFeed/blob/master/flicks_2.gif)
 
-*Locale specific configuration*
-
-![Locale specific configuration](https://github.com/zeantsoi/RYG/blob/master/ryg_3.gif)
-
-Last updated: 1/20/2016
+Last updated: 2/7/2016
 
 ##License##
 
